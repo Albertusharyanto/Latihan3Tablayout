@@ -2,32 +2,51 @@ package com.example.latihan3tablayout;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.viewpager.widget.ViewPager;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-
-import com.example.latihan3tablayout.ui.main.SectionsPagerAdapter;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private RecyclerView rvView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<String>dataSet;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstance){
+        super.onCreate(savedInstance);
         setContentView(R.layout.activity_main);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-      
+        dataSet=new ArrayList<>();
+        initDataSet();
+
+        rvView = (RecyclerView) findViewById(R.id.rv_main);
+        rvView.setHasFixedSize(true);
+
+        layoutManager=new LinearLayoutManager(this);
+        rvView.setLayoutManager(layoutManager);
+
+        adapter=new RecyclerViewAdapter(dataSet);
+        rvView.setAdapter(adapter);
+
+    }
 
 
+
+
+    private void initDataSet() {
+        dataSet.add("Keras Sakti The Movie");
+        dataSet.add("Kuntilanak");
+        dataSet.add("Madagaskar");
+        dataSet.add("Spongebob The Movie");
+        dataSet.add("One Piece Kaido Movie");
+        dataSet.add("B-Daman Action World");
+        dataSet.add("Corona Holiday");
+        dataSet.add("Lord Oden");
+        dataSet.add("Yakuza Come Back");
+        dataSet.add("Good Luck");
     }
 }
